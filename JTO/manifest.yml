@@ -1,0 +1,12 @@
+---
+applications:
+- name: JTOCompare
+  command: node app.js
+  routes:
+    - route: JTOCompare.cfapps.eu10.hana.ondemand.com
+  path: JTOCompare
+  memory: 128M
+  buildpacks: [nodejs_buildpack]
+
+
+ 

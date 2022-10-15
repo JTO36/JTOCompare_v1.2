@@ -1,0 +1,45 @@
+extends layout
+ 
+block content
+    //- h4 #{title}   
+    .container
+        .row
+            .col-auto.me-auto
+                form.d-flex(name="AddSearch" action="/AddSearch" method="GET")
+                    button.btn.btn-outline-primary(type='submit' ) Add Search
+
+            .col-auto
+                form.d-flex(name="Refresh" action="/Refresh" method="POST")    
+                    button.btn.btn-outline-dark(type='submit' ) Background Refresh Search Results 
+        .row
+            p
+    .container
+        table.table.table-striped.table-hover
+            thead.thead-dark(style='overflow: auto; position: sticky;top: 0; background: black; color: white')
+                tr
+                    //th(scope='col') #
+                    th(scope='col') Item
+                    th(scope='col') Website
+                    //  th(scope='col') Url
+                    th(scope='col') Price
+                    th(scope='col')  
+            tbody
+                each val in items ? items : []
+                    tr
+                        //td= val.id 
+                        td=val.item_name + ' '
+                            a(class='weblink' href=val.item_url)
+                                i.bi.bi-box-arrow-up-right
+                        //td=val.item_name   
+                        td= val.website_name  
+                        //  td= val.item_url
+                        td= val.item_price
+                        td 
+                            button.btn.btn-outline.danger(type='delete' style='color: white; background-color: #CD5C5C;'
+                            width='16' height='16') 
+                                    a(href='/deleteItem/'+val.id) 
+                                        i.bi.bi-trash3
+                                    
+
+
+        

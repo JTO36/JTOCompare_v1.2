@@ -1,0 +1,66 @@
+extends layout
+ 
+block content 
+    p
+        .modal-dialog
+             .modal-content
+                // Modal Header
+                .modal-header
+                    h4#myModalLabel.modal-title 
+                        | Add Search
+                        p
+                // Modal Body        
+                .modal-body
+                    .div.form-group
+                        form(class='form-searchadd' action='/addsearch' method='POST')
+     
+
+
+                            .div.form-group
+                                //    img.mb-4(src='/img/JTOCompare_Logo.svg' alt='' width='72' height='72')
+                                label(for='InputName') Name of item:
+                                input#InputUsername.form-control(name ='InputName' type='text' placeholder='Name' required='' autofocus='')
+                                p
+                                    //.div.form-group
+                                            label(for='InputWebsite') Website Name:                        
+                                            input#Inputwebsite.form-control(name ='InputWebsite' type='website' placeholder='Website' required='')
+                                            p
+
+                            .div.form-group 
+                                label(for='InputWebsite') Website Name:        
+                                    select(name='InputWebsite' placeholder="Website" id="web")
+                                        option(value='AmazonUK') Amazon UK
+                                        option(value='AmazonFR') Amazon France
+                                        option(value='AmazonDE') Amazon Germany 
+                                        option(value='AmazonES') Amazon Spain
+                                        option(value='NintendoUK') Nintendo UK
+                                        option(value='GameUK') Game UK
+                                        option(value='BaseUK') Base
+                                        script.
+                                            var urlmenu = document.getElementById('web');
+                                            urlmenu.onchange = function() { 
+                                                window.open( this.options[ this.selectedIndex ].value )
+                                                //or
+                                                //window.location.href = this.options[ this.selectedIndex ].value
+                                            }    
+                                p          
+
+
+                            .div.form-group      
+                                label(for='InputUrl') Url of item:                               
+                                input#InputUrl.form-control(name ='InputUrl' type='url' placeholder='URL' required='')
+                                p
+
+                          
+                            
+                                button.btn.btn-outline-primary.me-1(type="submit", name="Add Search") Add Search
+
+                        form(class='form-searchadd' action='/home' method='GET')
+                            p
+                            button.btn.btn-outline-danger.me-1(type="submit", name="Cancel") Cancel
+
+
+
+                .modal.footer   
+                    h4 :)
+                    
