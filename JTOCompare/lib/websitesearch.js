@@ -41,9 +41,11 @@ search = async(username) => {
     });
 
     items.forEach(async(val) => {
+
+
         const price = await fetchFromWeb(val.item_url, true, val.website_name)
             .then((price) => {
-                console.log(price);
+                // console.log(price);
                 //  //Query records from item table
                 const sql = 'UPDATE items SET item_price = ? where id = ?';
                 db.run(sql, [price, val.id], (err, rows) => {
@@ -52,7 +54,9 @@ search = async(username) => {
                 });
 
             });
+
     });
+
 };
 
 
@@ -141,14 +145,17 @@ processData = async(HTMLData, website_name, price) => {
 
 // Search the Webpage for the Price using the correct selector path for the webpage 
 WebSearch = async(HTMLData, selectorPath) => {
-    const $ = cheerio.load(HTMLData);
-    console.log($("title").text());
-    try {
-        var price = $(selectorPath).text()
-    } catch (error) {
-        console.error(error);
-    }
 
+    // check that HTMLData is a string to aviod error in cheerio
+    if (typeof HTMLData === 'string') {
+        const $ = cheerio.load(HTMLData);
+        console.log($("title").text());
+        try {
+            var price = $(selectorPath).text()
+        } catch (error) {
+            console.error(error);
+        }
+    };
     //  console.log($(price).text());
     return price;
 };
