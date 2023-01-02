@@ -17,6 +17,8 @@ const cexsearch = require('./lib/cexsearch');
 const websitesearch = require('./lib/websitesearch');
 
 
+
+
 //Express Modules
 const express = require('express');
 const cookieParser = require("cookie-parser");
@@ -41,6 +43,18 @@ exports.items = [];
 loggedin = false;
 
 
+
+
+//Swagger 
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+
+
+
+
+
+
 //Main function
 main();
 
@@ -53,9 +67,11 @@ function main() {
         //    console.log("connection sucessful");
     });
 
+
     //Set middleware settings
     //App Init
     const app = express();
+
 
     //Load View Engine
     app.set('views', path.join(__dirname, 'views'));
@@ -88,10 +104,42 @@ function main() {
         next();
     });
 
+    //Swagger
+    // https://swagger.io/specification/#infoObject
+    const swaggerOptions = {
+        swaggerDefinition: {
+            info: {
+                title: 'JTO Compare API',
+                description: 'JTO Compare API',
+                contact: {
+                    name: "Josh Owens"
+                },
+                servers: ["http://localhost:3000"]
+            }
+        },
+        apis: ["routes/*.js",
+            "app.js"
+        ]
+    }
+
+    const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
     // Routes: (Transfering to routes/route)
     // Functions: (Transfering to controllers/controller)
     // Need to create objects for db, so the select functions can be moved to controller.js
     // and the routes to route.js
+
+    /** 
+     * @swagger
+     * /home:
+     *   get:
+     *      description: Get Home page
+     *   responses:
+     *     '200':
+     *      description: A successful response
+     */
 
 
     // http://localhost:3000/home
@@ -322,6 +370,9 @@ function main() {
     app.listen(port, function() {
         console.log('Your application is running on http://localhost:3000');
     });
+
+
+
 }
 
 // ////////////////////////////

@@ -7,12 +7,21 @@ module.exports = function(router) {
     // Root/Default GET
     router.get('/', controller.root);
 
+
     // Login GET
     router.get('/login', controller.login);
 
     //Login POST
     router.post('/login', controller.login);
-
+    /** 
+     * @swagger
+     * /addsearch:
+     *  get:
+     *   description: Add search
+     *  responses:
+     * '200':
+     *   description: A successful reponse 
+     */
     // Add Search GET 
     router.get('/addsearch', controller.addsearch);
 

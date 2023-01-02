@@ -29,7 +29,9 @@
         "path": "^0.12.7",
         "pug": "^3.0.2",
         "serve-favicon": "^2.5.0",
-        "sqlite3": "^5.0.11"
+        "sqlite3": "^5.0.11",
+        "swagger-jsdoc": "^6.2.7",
+        "swagger-ui-express": "^4.6.0"
     },
     "description": "",
     "devDependencies": {
